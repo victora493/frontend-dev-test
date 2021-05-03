@@ -10,7 +10,7 @@ export default function Pagination({curPage, setCurPage, pages}) {
             >
                 Previous
             </li>
-            <li>{curPage + 1} / {pages}</li>
+            <li>{pages ? curPage + 1 : pages} / {pages}</li>
             <li 
                 className={curPage + 1 === pages && 'disabled'} 
                 onClick={() => setCurPage(curPage + 1 < pages ? curPage + 1 : curPage)}
