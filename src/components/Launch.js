@@ -1,18 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../styles/Launch.module.css'
 import { Checkmark, Close, WikiIcon , Close2} from '../svgs'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 
-export default function Launch(props) {
-    const { launches, selectedLaunch } = props
-    const history = useHistory()
+export default function Launch({launches}) {
+    const [selectedLaunch, setSelectedLaunch] = useState(null)
+
+    const { hash } = useLocation()
+    const history = useHistory();
+
+    // listen to hash change in tab to update launch
+    useEffect(() => {
+        const curLaunch = launches.find((launch) => launch.id === hash.slice(1))
+        setSelectedLaunch(curLaunch)
+        console.log(curLaunch);
+    }, [hash])
     
     return (
         <>
             <div class={styles.launchContainer}>
                 <h1>Launch</h1>
-                    {selectedLaunch 
+                    {selectedLaunch
                         ? (
                             <div class={styles.mainContent}>
                                 <Close2

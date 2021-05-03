@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './SearchBar.module.css'
 
-export default function SearchBar() {
+export default function SearchBar({setInputValue}) {
     const [term, setTerm] = useState('')
+
+    useEffect(() => {
+        setInputValue(term)
+    }, [term])
+
 
     return (
         <div className={styles.searchWrapper}>

@@ -1,0 +1,23 @@
+li {
+    margin: 0;
+}
+/* pagination */
+.pagination {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    margin-top: 10px;
+}
+.pagination li{
+    text-align: center;
+    position: relative;
+    padding: 5px 15px;
+    font-weight: 600;
+}
+
+.pagination li:hover:not(:nth-child(2)){
+    cursor: pointer;
+    background-color: #E5E4B4;
+}
+
+
