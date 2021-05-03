@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styles from '../styles/Launch.module.css'
 import { Checkmark, Close, WikiIcon , Close2} from '../svgs'
 import { useHistory, useLocation } from 'react-router-dom'
 
 
 export default function Launch({launches}) {
+    const calledOnce = useRef(false);
     const [selectedLaunch, setSelectedLaunch] = useState(null)
 
     const { hash } = useLocation()
@@ -12,10 +13,27 @@ export default function Launch({launches}) {
 
     // listen to hash change in tab to update launch
     useEffect(() => {
+        selectLaunch()
+    }, [hash])
+
+    useEffect(() => {
+        if(launches?.length) {
+            console.log(calledOnce);
+            if (calledOnce.current) {
+                return;
+            }
+            calledOnce.current = true
+            selectLaunch()
+        }
+    }, [launches])
+
+    function selectLaunch() {
         const curLaunch = launches.find((launch) => launch.id === hash.slice(1))
         setSelectedLaunch(curLaunch)
         console.log(curLaunch);
-    }, [hash])
+    }
+
+    
     
     return (
         <>
