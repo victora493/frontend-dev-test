@@ -28,7 +28,7 @@ export default function LaunchesList({isLoading, launches, errMsg, pages, setPag
                 :
                     // in case there are 0 pages(no data found when filtering) do not loop
                     pages === 0 ? 
-                        <p className={styles.noContentText} >{errMsg}</p> 
+                        <p >{errMsg}</p> 
                     : 
                         launches?.slice(curPage * resultsPerPage, curPage * resultsPerPage + resultsPerPage).map(launch => (
                     <SingleLauchList
