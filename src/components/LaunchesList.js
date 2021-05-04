@@ -30,7 +30,9 @@ export default function LaunchesList({isLoading, launches, errMsg, pages, setPag
                     pages === 0 ? 
                         <p >{errMsg}</p> 
                     : 
-                        launches?.slice(curPage * resultsPerPage, curPage * resultsPerPage + resultsPerPage).map(launch => (
+                        launches
+                        ?.slice(curPage * resultsPerPage, curPage * resultsPerPage + resultsPerPage)
+                        .map(launch => (
                     <SingleLauchList
                             key={launch.id}
                             launch={launch}
