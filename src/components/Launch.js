@@ -64,7 +64,7 @@ export default function Launch({launches}) {
                                     }
                                 </p>
                                 <div class={styles.successContainer}>
-                                    <p> <span>Mission success:</span></p>
+                                    <p> <span>Launch success:</span></p>
                                     {selectedLaunch.success ? 
                                         (<Checkmark
                                             className={styles.success}

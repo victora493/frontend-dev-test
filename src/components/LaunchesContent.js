@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from '../styles/LaunchesContent.module.css';
 import axios from 'axios';
 import Launch from '../components/Launch';
@@ -7,6 +7,7 @@ import LaunchesList from '../components/LaunchesList';
 
 
 export default function LaunchesContent() {
+    const defaultLaunches = useRef([])
     const [isLoading, setIsLoading] = useState(false);
     const [launches, setLaunches] = useState([]);
     const [inputValue, setInputValue] = useState('')
@@ -27,6 +28,7 @@ export default function LaunchesContent() {
 
             const { data } = await axios('https://api.spacexdata.com/v4/launches/past');
             setLaunches(data)
+            defaultLaunches.current = data;
             console.log(data)
 
         } catch(err) {
@@ -40,7 +42,7 @@ export default function LaunchesContent() {
 
     // listen to input change to filter the data
     useEffect(() => {
-        const filtered = launches.filter(launch => {
+        const filtered = defaultLaunches.current.filter(launch => {
             return launch.name.toLowerCase().includes(inputValue.toLowerCase())
         })
         setLaunches(filtered)
